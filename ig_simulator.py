@@ -250,7 +250,7 @@ def ReadBaseLens(options):
     base_sequences_fname = options.base_sequences
     base_lens = []
     lines = open(base_sequences_fname, "r").readlines()
-    for i in range(0, len(lines) / 2):
+    for i in range(0, len(lines) // 2):
         base_lens.append(len(lines[i * 2 + 1].strip()))
     return base_lens 
 

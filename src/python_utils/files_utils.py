@@ -32,14 +32,14 @@ class DataFrame:
     colnames = list()
 
 def PrintDataFrame(data_frame):
-    print(data_frame.colnames)
+    print((data_frame.colnames))
     for name in data_frame.colnames:
-        print(name + ":")
-        print(data_frame.data[name])
+        print((name + ":"))
+        print((data_frame.data[name]))
 
 def ReadData(filename):
     if not os.path.exists(filename):
-        print("File " + filename + " is not exists")
+        print(("File " + filename + " is not exists"))
         sys.exit(1)
     file_handler = open(filename, 'r')
     

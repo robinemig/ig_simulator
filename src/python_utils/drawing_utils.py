@@ -14,12 +14,13 @@ matplotlib.use('Agg')
 import pylab
 import numpy 
 import matplotlib.pyplot as plt
+from pylab import *
 
 class GraphicalData:
     all_keys = list()
     nt_keys = list()
     max_cluster = 0
-    min_cluster = sys.maxint
+    min_cluster = sys.maxsize
 
 class GraphicalSetting:
     xlabel = ""
@@ -161,7 +162,7 @@ def MaxValue(x) :
     return x_max
 
 def MinValue(x) :
-    x_min = sys.maxint
+    x_min = sys.maxsize
     for i in range(0, len(x)):
         x_min = min(x_min, x[i])
     return x_min
@@ -177,13 +178,13 @@ def DrawMultiplePlot(x, y, setting):
     from scipy.interpolate import spline
 
     x_max = 0
-    x_min = sys.maxint
+    x_min = sys.maxsize
     for i in range(0, len(x)):
         x_max = max(x_max, MaxValue(x[i]))
         x_min = min(x_min, MinValue(x[i]))
 
     y_max = 0
-    y_min = sys.maxint
+    y_min = sys.maxsize
     for i in range(0, len(y)):
         y_max = max(y_max, MaxValue(y[i]))
         y_min = min(y_min, MinValue(y[i]))
@@ -252,7 +253,7 @@ def GetListByThreshold(item_list, thresh):
 
 def DrawVariuosClusterSizesHist(histograms, histlabel, size_thresholds, basename):
     if len(histograms) != len(histlabel):
-        print "ERROR: # of labels != # of histograms"
+        print("ERROR: # of labels != # of histograms")
         sys.exit(1)
 
     max_cluster = 0
@@ -286,7 +287,6 @@ def DrawSomaticMutations(X, Y, cdrs, settings):
         max_y = max(max_y, MaxValue(y))
     max_y += 1
 
-    from pylab import *
     cdr_color = "#EFBEBE"
     # cdr1
     gca().add_patch(Rectangle((cdrs[0], 0), cdrs[1] - cdrs[0], max_y, facecolor= cdr_color, lw = 0))
@@ -316,7 +316,6 @@ def DrawMutationHistogram(pos, settings, chain_type = "HC"):
         cdr3_end = .86
 
     n, bins, patches = DrawHistogram(pos, settings)
-    from pylab import *
     cdr_color = "#EFBEBE"
     plt.gca().add_patch(Rectangle((cdr1_start, 0), cdr1_end - cdr1_start, MaxValue(n) + 2, facecolor= cdr_color, lw = 0))
     plt.gca().add_patch(Rectangle((cdr2_start, 0), cdr2_end - cdr2_start, MaxValue(n) + 2, facecolor= cdr_color, lw = 0))
@@ -343,7 +342,7 @@ def DrawIdentityToLengthDistribution(perc_identity, cluster_length, plotname):
 def DrawAnyClusterSizesHist(histograms, histlabel, histname):
     if not any(histograms):
         return
-    max_cluster = max(max(histograms[i]) for i in xrange(len(histograms)) if histograms[i])
+    max_cluster = max(max(histograms[i]) for i in range(len(histograms)) if histograms[i])
     bins = min(GetMaxBinsNumber(len(histograms)), max_cluster / 2)
     if bins == 0:
         bins = 1
@@ -369,7 +368,7 @@ def DrawClusterGroupsBarChart(data, labels, chartname):
     colors = ["blue", "orange", "red"]
     fig, ax = plt.subplots()
     rects = [None] * len(labels)
-    for i in xrange(len(data)):
+    for i in range(len(data)):
         rects[i] = ax.bar(ind + width * i, data[i], width, color = colors[i])
     
     ax.set_ylabel('Cluster number')

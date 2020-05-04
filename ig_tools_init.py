@@ -13,7 +13,7 @@ import logging
 import shutil
 import datetime
 from time import gmtime, strftime
-from matplotlib.font_manager import home
+#from matplotlib.font_manager import home
 
 home_directory = os.path.abspath(os.path.dirname(os.path.realpath(__file__))) + '/'
 ig_bin_directory = os.path.join(home_directory, "bin/")
@@ -43,7 +43,7 @@ def PrintCommandLine(argv, log):
 
 def ReadConfig():
     if not os.path.exists(path_to_config_template):
-        print("ERROR: config file " + path_to_config_template + " was not found")
+        print(("ERROR: config file " + path_to_config_template + " was not found"))
     f = open(path_to_config_template, "r")
     config_params = dict()
     for line in f.readlines():
